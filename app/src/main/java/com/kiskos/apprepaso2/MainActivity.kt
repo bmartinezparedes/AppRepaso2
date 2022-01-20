@@ -26,8 +26,7 @@ class MainActivity : AppCompatActivity() {
         //Inicializar FireBase Auth
         auth = Firebase.auth
         //Inicializo RealTime Base de datos
-        database = Firebase.database.reference
-        //Creo el boton para darse de alta
+        database = Firebase.database("https://apprepaso-c63ee-default-rtdb.europe-west1.firebasedatabase.app/").reference
         val darseDeAlta: Button = findViewById(R.id.botonLoguearse)
         darseDeAlta.setOnClickListener{
             //Declaro la variable de usuario para recojer el texto
@@ -123,6 +122,9 @@ class MainActivity : AppCompatActivity() {
      */
     fun writeNewData(userId:String,lt:Double,lg:Double){
         Log.d(TAG,"Escribiendo Datos")
+        val user = Users(lg,lt,userId)
+        database.child("users/AA03").setValue(user)
+
     }
 
     private fun updateUI(user: FirebaseUser?) {
