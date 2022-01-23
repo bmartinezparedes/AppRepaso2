@@ -15,18 +15,24 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.kiskos.apprepaso2.databinding.ActivityMapsBinding
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val PERMISO_LOCALIZACION: Int=3
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private lateinit var database: DatabaseReference //variable database que la inicializo mas tarde
+    private val TAG = "RealTime"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        database = Firebase.database("https://apprepaso-c63ee-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -108,4 +114,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             comprobarPermisos()
         }
     }
+    /**
+     * @param userId Nombre del usuario
+     * @param lt Latitud
+     * @param lg Longitud
+     */
+    fun writeNewData(userId:String,lt:Double,lg:Double){
+        Log.d(TAG,"Escribiendo Datos")
+        val user = Users(lg,lt,userId)
+        database.child("users/AA03").setValue(user)
+
+    }
+
 }

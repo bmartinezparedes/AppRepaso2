@@ -16,8 +16,7 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference //variable database que la inicializo mas tarde
-    private val TAG = "RealTime"
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         //Inicializar FireBase Auth
         auth = Firebase.auth
         //Inicializo RealTime Base de datos
-        database = Firebase.database("https://apprepaso-c63ee-default-rtdb.europe-west1.firebasedatabase.app/").reference
         val darseDeAlta: Button = findViewById(R.id.botonLoguearse)
         darseDeAlta.setOnClickListener{
             //Declaro la variable de usuario para recojer el texto
@@ -46,12 +44,6 @@ class MainActivity : AppCompatActivity() {
             //Llamo al metodo donde accedo a la cuenta y le paso de variables el correo y la contraseña
             accederCuenta(usuario.text.toString(),contraseña.text.toString())
         }
-        //boton para subir datos a RealTime
-        val miBoton: Button = findViewById(R.id.miBoton)
-        miBoton.setOnClickListener {
-            writeNewData( "Hector", 8.041, 5.366)
-        }
-
     }
     public override fun onStart() {
         super.onStart()
@@ -113,18 +105,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         // [Fin de acceso a cuenta]
-    }
-
-    /**
-     * @param userId Nombre del usuario
-     * @param lt Latitud
-     * @param lg Longitud
-     */
-    fun writeNewData(userId:String,lt:Double,lg:Double){
-        Log.d(TAG,"Escribiendo Datos")
-        val user = Users(lg,lt,userId)
-        database.child("users/AA03").setValue(user)
-
     }
 
     private fun updateUI(user: FirebaseUser?) {
