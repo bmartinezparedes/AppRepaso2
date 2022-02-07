@@ -23,6 +23,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.kiskos.apprepaso2.databinding.ActivityMapsBinding
+import org.json.JSONObject
+import org.json.JSONTokener
 import org.w3c.dom.Text
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -31,7 +33,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var database: DatabaseReference //variable database que la inicializo mas tarde
     private val TAG = "RealTime"
-    private var datos = arrayOf(0)
+    private var datos = arrayOf<Users>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,6 +54,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val dato = snapshot.getValue()
                 Log.d(TAG,"cambio: "+ dato.toString())
                 //miTexto.text = dato.toString()
+                val jsonObject = JSONTokener(dato.toString()).nextValue() as JSONObject
+                Log.d(TAG,"JSON: "+ jsonObject.getString("AA01"))
 
             }
 
@@ -59,7 +63,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Log.d(TAG,"loadPost:onCancelled",error.toException())
             }
         }
-        database.addValueEventListener(datoListener)
+        database.child("/users").addValueEventListener(datoListener)
     }
 
     /**
@@ -143,7 +147,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     fun writeNewData(userId:String,lt:Double,lg:Double){
         Log.d(TAG,"Escribiendo Datos")
-        val user = Users(lg,lt,userId)
+        val user = Users(userId,lg,lt,userId)
         database.child("users/AA03").setValue(user)
 
     }
