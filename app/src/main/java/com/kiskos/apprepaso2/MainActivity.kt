@@ -96,9 +96,11 @@ class MainActivity : AppCompatActivity() {
                     if (intent.getStringExtra(EXTRA_MESSAGE)=="Profesional") {
                         intent = Intent(this, MapsActivity::class.java).apply {
                         }
+                        Log.i("Usuario", "Conectado como Profesional")
                     }else if(intent.getStringExtra(EXTRA_MESSAGE)=="Cliente"){
                         intent = Intent(this, MapsActivity::class.java).apply {
                         }
+                        Log.i("Usuario", "Conectado como Cliente")
                     }
                     //Inicio el intent
                     startActivity(intent)
