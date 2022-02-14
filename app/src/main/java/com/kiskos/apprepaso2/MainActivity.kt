@@ -92,7 +92,13 @@ class MainActivity : AppCompatActivity() {
                     updateUI(user)
                     Toast.makeText(baseContext, "Bien.",
                         Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MapsActivity::class.java).apply {
+
+                    if (intent.getStringExtra(EXTRA_MESSAGE)=="Profesional") {
+                        intent = Intent(this, MapsActivity::class.java).apply {
+                        }
+                    }else if(intent.getStringExtra(EXTRA_MESSAGE)=="Cliente"){
+                        intent = Intent(this, MapsActivity::class.java).apply {
+                        }
                     }
                     //Inicio el intent
                     startActivity(intent)
