@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         Log.i("Usuario", "Conectado como Profesional")
                     }else if(intent.getStringExtra(EXTRA_MESSAGE)=="Cliente"){
-                        intent = Intent(this, MapsActivity::class.java).apply {
+                        intent = Intent(this, ClienteActivity::class.java).apply {
                         }
                         Log.i("Usuario", "Conectado como Cliente")
                     }
