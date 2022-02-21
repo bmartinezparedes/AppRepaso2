@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,7 +28,9 @@ class MapsFragment : Fragment() {
     private lateinit var mMap: GoogleMap
     private lateinit var database: DatabaseReference
     private val TAG = "RealTime"
-    private val callback = OnMapReadyCallback {mMap=it
+    private val callback = OnMapReadyCallback {
+        //le digo que el mapa de clase es igual al mapa que instancio
+        mMap=it
         database = Firebase.database("https://apprepaso-c63ee-default-rtdb.europe-west1.firebasedatabase.app/").reference
         /**
          * Manipulates the map once available.
@@ -47,9 +48,9 @@ class MapsFragment : Fragment() {
         //Hago visible los botones para apliar y desampliar el mapa
         mMap.uiSettings.isZoomControlsEnabled=true
 
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val intituto = LatLng(42.23664789365711, -8.714183259832732)
+        mMap.addMarker(MarkerOptions().position(intituto).title("Centro de reclusion"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(intituto))
     }
 
     override fun onCreateView(
