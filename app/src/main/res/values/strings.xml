@@ -3,7 +3,7 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_cliente">Cliente</string>
 
-    <string name="title_home">Principal</string>
-    <string name="title_dashboard">Lista</string>
+    <string name="title_mapa">Mapa</string>
+    <string name="title_dashboard">Profesionales</string>
     <string name="title_notifications">Notificaciones</string>
 </resources>
