@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT).show()
 
                     if (intent.getStringExtra(EXTRA_MESSAGE)=="Profesional") {
-                        intent = Intent(this, MapsActivity::class.java).apply {
+                        intent = Intent(this, ProfesionalActivity::class.java).apply {
                             /*
                              *Con finish() impedimos que retorne al anterior activity donde tenemos
                              *la autenticicación y no queremos que de recuperado esos datos,

@@ -6,4 +6,6 @@
     <string name="title_mapa">Mapa</string>
     <string name="title_dashboard">Profesionales</string>
     <string name="title_notifications">Notificaciones</string>
+
+    <string name="textProfesional">ESPERANDO CONFIRMACIÓN</string>
 </resources>
