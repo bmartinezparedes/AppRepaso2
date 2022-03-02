@@ -27,7 +27,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var database: DatabaseReference //variable database que la inicializo mas tarde
     private val TAG = "RealTime"
-    private var datos = arrayOf<Users>()
+    private var datos = arrayOf<Cliente>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -141,9 +141,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     fun writeNewData(userId:String,lt:Double,lg:Double){
         Log.d(TAG,"Escribiendo Datos")
-        val user = Users(userId,lg,lt,userId)
+        val user = Cliente()
         database.child("users/AA03").setValue(user)
 
     }
-
 }

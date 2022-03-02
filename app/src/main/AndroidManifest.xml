@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppRepaso2">
         <activity
+            android:name=".Registro"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProfesionalActivity"
             android:exported="false" />
         <!--

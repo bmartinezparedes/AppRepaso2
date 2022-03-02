@@ -27,12 +27,11 @@ class MainActivity : AppCompatActivity() {
         //Inicializo RealTime Base de datos
         val darseDeAlta: Button = findViewById(R.id.botonLoguearse)
         darseDeAlta.setOnClickListener{
-            //Declaro la variable de usuario para recojer el texto
-            val usuario: EditText = findViewById(R.id.correoUsuario)
-            //Declaro la variable de contraseña para recojer el texto
-            val contraseña: EditText = findViewById(R.id.contraseñaUsuario)
-            //Llamo al metodo donde de crear cuenta y le paso de variables el correo y la contraseña
-            crearCuenta(usuario.text.toString(),contraseña.text.toString())
+            val intent2= Intent(this, Registro::class.java).apply {
+                putExtra(EXTRA_MESSAGE,intent.getStringExtra(EXTRA_MESSAGE).toString())
+                Log.d("Real Time", intent.getStringExtra(EXTRA_MESSAGE).toString())
+            }
+            startActivity(intent2)
         }
         //creo el boton para darse de alta
         val accederCuenta: Button = findViewById(R.id.botonIniciarsesion)
@@ -52,29 +51,6 @@ class MainActivity : AppCompatActivity() {
         if(currentUser != null){
             reload();
         }
-    }
-    /**
-     * @param email Correo del usuario
-     * @param password Contraseña del usuario
-     */
-    private fun crearCuenta(email: String, password: String) {
-        //Crear nuevo usuario
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Iniciar sesión correctamente, actualizar la interfaz de usuario con la información del usuario que inició sesión
-                    Log.i("bien", "Crear Usuario Bien")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // Si el inicio de sesión falla, muestre un mensaje al usuario.
-                    Log.i("mal", "Crear Usuario Mal", task.exception)
-                    Toast.makeText(baseContext, "Fallo en autenticación.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-            }
-        // [Fin Crear Cuenta]
     }
     /**
      * @param email Correo del usuario
